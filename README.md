@@ -23,3 +23,38 @@ Key Features:
 This repository houses the source code and documentation for the M - Maternity Care Management App. It serves as a centralized platform for collaborative development, bug tracking, feature enhancement, and community contributions. Together, we can revolutionize maternity care and empower women on their beautiful journey to motherhood.
 
 (Note: This description is a starting point and can be modified or expanded upon based on specific vision and requirements for the application.)
+
+
+
+*******************************************************************************************************************************************************************************************************************************
+
+Some suggested models for M (Mama) maternity care management system, implemented using Django as a backend:
+
+1. User:
+   - Fields: username, email, password, first_name, last_name, date_of_birth, contact_number, address, profile_picture
+   - Description: Represents the users of your application, including expectant mothers, healthcare professionals (doctors, nurses), and administrators.
+
+2. Pregnancy:
+   - Fields: user (Foreign Key), start_date, due_date, medical_history, complications, notes
+   - Description: Stores information about a user's pregnancy journey, including important dates, medical history, any complications, and additional notes.
+
+3. Appointment:
+   - Fields: user (Foreign Key), date, time, doctor (Foreign Key), location, notes
+   - Description: Represents appointments scheduled between a user and a doctor, storing details such as the date, time, location, and any additional notes.
+
+4. TestResult:
+   - Fields: user (Foreign Key), test_name, result, date, notes
+   - Description: Records the results of medical tests conducted during the pregnancy, including the test name, the result, the date of the test, and any relevant notes.
+
+5. HealthTracker:
+   - Fields: user (Foreign Key), weight, blood_pressure, heart_rate, symptoms, fetal_movements, notes
+   - Description: Tracks the health parameters of an expectant mother, such as weight, blood pressure, heart rate, and any reported symptoms or fetal movements. It also allows for notes to be added.
+
+6. Article:
+   - Fields: title, content, author, publication_date
+   - Description: Represents educational articles related to pregnancy, childbirth, and postpartum care. It includes fields for the title, content, author, and publication date.
+
+You can further expand and customize the models based on the specific requirements and functionalities of your M maternity care management app.quirements for the application.
+
+I intend to have front end mobile app for users ( Clients) and Desktop app for Health care personels (Doctors and Nurses)
+
