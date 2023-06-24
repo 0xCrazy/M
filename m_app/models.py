@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
 class StationName(models.Model):
     pass
 
-class EmployeeData(AbstracttUser):
+class EmployeeDataManager(UserManager):
     pass
 
 class ClientData(models.Model):
@@ -20,7 +21,7 @@ class MenstruationData(models.Model):
 class SpecialTestData(models.Model):
     pass
 
-class ReportsData(models.model):
+class ReportsData(models.Model):
     pass
 
 
