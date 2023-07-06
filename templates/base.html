@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}">
+    <title>M-App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+	
+	<!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+	
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/select2.min.css' %}">
+	
+	<!-- Datatables CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/datatables/datatables.min.css' %}">
+	
+	<!-- Feathericon CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/feather/feather.css' %}">
+	
+	<!-- Main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+     
+</head>
+<body>
+    <!-- Header -->
+    <div class="main-wrapper">
+        <!-- Notifications -Messahes--Settings---->
+        {% block heading%}
+        {% endblock heading}
+
+    <!-- Main Nav -->
+        {% block main-nav%}
+        {% endblock main-nav %}
+
+    <!-- Main-Content-ex-admin-dash-->
+        {% block main-content %}
+        {% endblock main-content%}
+       
+    </div>
+    <!-- Footer -->
+        {% block footer%}
+        {% endblock footer%}
+</body>
+</html>

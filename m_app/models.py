@@ -1,6 +1,6 @@
 from typing import Any, Optional
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+from django.contrib.auth.models import Group, Permission, AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
 
 # Create your models here.
@@ -45,6 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
 
+    groups = models.ManyToManyField(Group, related_name='m_app_users', blank=True, help_text='This user group belongs to', verbose_name='groups',)
+    user_permissions = models.ManyToManyField(Permission, related_name='m_app_users', blank=True, help_text='specific permision for this user', verbose_name='user permisions')
 
     objects = EmployeeDataManager()
 
@@ -56,6 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+    
 
     def get_full_name(self):
         return self.name
