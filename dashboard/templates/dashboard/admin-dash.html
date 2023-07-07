@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{%load static %}
+{%block main-content%}
 <div class="page-wrapper">
     <div class="content">
     
@@ -19,8 +22,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="morning-user">
-                        <h2>Good Morning, <span>Daniel Bruk</span></h2>
-                        <p>Have a nice day at work</p>
+                        <h2>Good Morning, <span>{{request.user}}</span></h2>
+                        <p>Have a nice day working</p>
                     </div>
                 </div>
                 <div class="col-md-6 position-blk">
@@ -669,3 +672,4 @@
         </div>
     </div>
 </div>
+{%endblock main-content%}

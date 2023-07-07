@@ -1,10 +1,11 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
     <title>M-App</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
@@ -32,20 +33,24 @@
     <!-- Header -->
     <div class="main-wrapper">
         <!-- Notifications -Messahes--Settings---->
-        {% block heading%}
-        {% endblock heading}
+        {% block main-heading%}
+        {% include 'header.html' %}
+        {% endblock main-heading%}
 
     <!-- Main Nav -->
         {% block main-nav%}
+        {% include 'nav.html' %}
         {% endblock main-nav %}
 
     <!-- Main-Content-ex-admin-dash-->
         {% block main-content %}
+
         {% endblock main-content%}
        
     </div>
     <!-- Footer -->
         {% block footer%}
+        {% include 'footer.html' %}
         {% endblock footer%}
 </body>
 </html>
