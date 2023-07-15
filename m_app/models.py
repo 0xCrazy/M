@@ -4,9 +4,79 @@ from django.contrib.auth.models import Group, Permission, AbstractBaseUser, Perm
 from django.utils import timezone
 
 # Create your models here.
+MALE = 'MALE'
+FEMALE = 'FEMALE'
+GENDER = [
+    (MALE, 'MALE'), (FEMALE, 'FEMALE')
+]
+
+PRIMARY = 'PRIMARY'
+SECONDARY = 'SECONDARY'
+HIGH_SCHOOL = 'HIGH SCHOOL'
+UNIVERSITY = 'UNIVERSITY'
+ILLITERACY = 'ILLITERACY'
+EDUCATION_LEVEL = [
+    (PRIMARY, 'PRIMARY'), (SECONDARY, 'SECONDARY'), (HIGH_SCHOOL, 'HIGH SCHOOL'), 
+    (UNIVERSITY, 'UNIVERSITY'), (ILLITERACY, 'ILLITERACY')
+]
+
+NO_JOB = 'NO JOB'
+ENTERPRENEUR = 'ENTERPRENEUR'
+EMPLOYED = 'EMPLOYED'
+FARMER = 'FARMER'
+OCCUPATION = [
+                (NO_JOB, 'NO JOB'), (ENTERPRENEUR, 'ENTERPRENEUR'), (EMPLOYED, 'EMPLOYED'), (FARMER, 'FARMER')
+              ]
+
+ARUSHA = 'Arusha' 
+DARESSALAAM = 'Dar es Salaam' 
+DODOMA = 'Dodoma' 
+IRINGA = 'Iringa' 
+KAGERA = 'Kagera'  
+KIGOMA = 'Kigoma' 
+KILIMANJARO = 'Kilimanjaro'
+LINDI = 'Lindi' 
+MANYARA = 'Manyara' 
+MARA = 'Mara'
+MBEYA = 'Mbeya' 
+MOROGORO = 'Morogoro'
+MTWARA = 'Mtwara'
+MWANZA = 'Mwanza' 
+PEMBA_NORTH = 'Pemba North (Wete)' 
+PEMBA_SOUTH = 'Pemba South (Mkoani)' 
+PWANI = 'Pwani (Kibaha)' 
+RUKWA = 'Rukwa (Sumbawanga)' 
+RUVUMA = 'Ruvuma (Songea)' 
+SHINYANGA = 'Shinyanga' 
+SINGIDA = 'Singida'
+TABORA = 'Tabora'
+TANGA = 'Tanga'  
+ZANZIBAR_CENTRAL = 'Zanzibar Central/South (Koani)'
+ZANZIBAR_NORTH = 'Zanzibar North (Mkokotoni)' 
+ZANZIBAR_URBAN_WEST = 'Zanzibar Urban/West (Stone Town)'
+RESIDENCE = [
+    (ARUSHA, 'Arusha'), (DARESSALAAM, 'Dar es Salaam'), (DODOMA, 'Dodoma'), (IRINGA, 'Iringa'), 
+(KAGERA, 'Kagera'), (KIGOMA, 'Kigoma'), (KILIMANJARO, 'Kilimanjaro'), (LINDI, 'Lindi'), (MANYARA, 'Manyara'), 
+(MARA, 'Mara'), (MBEYA, 'Mbeya'), (MOROGORO, 'Morogoro'), (MTWARA, 'Mtwara'), (MWANZA, 'Mwanza'), 
+(PEMBA_NORTH, 'Pemba North (Wete)'), (PEMBA_SOUTH, 'Pemba South (Mkoani)'), (PWANI, 'Pwani (Kibaha)'),
+(RUKWA, 'Rukwa (Sumbawanga)'), (RUVUMA, 'Ruvuma (Songea)'), (SHINYANGA, 'Shinyanga'), (SINGIDA, 'Singida'), (TABORA, 'Tabora'),
+(TANGA, 'Tanga'),  (ZANZIBAR_CENTRAL, 'Zanzibar Central/South (Koani)'), (ZANZIBAR_NORTH, 'Zanzibar North (Mkokotoni)'), 
+(ZANZIBAR_URBAN_WEST, 'Zanzibar Urban/West (Stone Town)')
+
+]
+
+
 
 class StationName(models.Model):
-    pass
+    name = models.CharField(max_length=250)
+    description = models.CharField(max_length=250)
+    registration_number = models.CharField(max_length=30)
+    mobile_number = models.CharField(max_length=13)
+    physical_address = models.CharField(max_length=100)
+    
+    class Meta:
+        verbose_name = 'Station Name'
+        verbose_name_plural = 'Station Names'
 
 class EmployeeDataManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -31,6 +101,9 @@ class EmployeeDataManager(UserManager):
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(email, password, **extra_fields)
     
+    class Meta:
+        verbose_name = 'Employees Data Manager'
+        verbose_name_plural = 'Employees Data Manager'
 
 
 
@@ -71,10 +144,46 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class ClientData(models.Model):
-    pass
+    #---------clients--personal--details----------------------------
+    full_name =''
+    first_name = models.CharField(max_length=50,)
+    middle_name = models.CharField(max_length=50,)
+    last_name = models.CharField(max_length=50,)
+    date_of_birth = models.DateField()
+    age = ''
+    gender = models.CharField(max_length=10, choices=GENDER, default='FEMALE')
+    mobile_number = models.CharField(max_length=10, help_text='0762111127')
+    education_level = models.CharField(max_length=30, choices=EDUCATION_LEVEL)
+    curent_occupation = models.CharField(max_length=100, choices=OCCUPATION)
+    residential_address = models.CharField(max_length=250, choices=RESIDENCE)
+
+    
+
+
+class ClientsSpouseData(models.Model):
+    #----------clients--spouse--detail---------------------------------------
+    client = models.ForeignKey(ClientData, on_delete=models.SET_NULL, blank=True, null=True)
+    full_name =''
+    first_name = models.CharField(max_length=50,)
+    middle_name = models.CharField(max_length=50,)
+    last_name = models.CharField(max_length=50,)
+    date_of_birth = models.DateField()
+    age = ''
+    gender = models.CharField(max_length=10, choices=GENDER, default='MALE')
+    mobile_number = models.CharField(max_length=10, help_text='0762111127')
+    education_level = models.CharField(max_length=30, choices=EDUCATION_LEVEL)
+    curent_occupation = models.CharField(max_length=100, choices=OCCUPATION)
+    residential_address = models.CharField(max_length=250, choices=RESIDENCE)
+
 
 class MaternityData(models.Model):
-    pass
+    client  = models.ForeignKey(ClientData, on_delete=models.CASCADE, blank=True, null=True)
+    birth_number = models.CharField(max_length=2,)
+    number_of_time_given_birth = models.CharField(max_length=2)
+    living_children = models.CharField(max_length=2)
+    miscariages = models.CharField(max_length=2)
+    year_of_miscariage = models.DateField(null=True)
+    
 
 class MenstruationData(models.Model):
     pass
