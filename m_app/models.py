@@ -101,9 +101,6 @@ class EmployeeDataManager(UserManager):
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(email, password, **extra_fields)
     
-    class Meta:
-        verbose_name = 'Employees Data Manager'
-        verbose_name_plural = 'Employees Data Manager'
 
 
 
@@ -157,6 +154,10 @@ class ClientData(models.Model):
     curent_occupation = models.CharField(max_length=100, choices=OCCUPATION)
     residential_address = models.CharField(max_length=250, choices=RESIDENCE)
 
+    class Meta:
+        verbose_name = 'Client Data'
+        verbose_name_plural = "Clients' Data"
+
     
 
 
@@ -175,6 +176,9 @@ class ClientsSpouseData(models.Model):
     curent_occupation = models.CharField(max_length=100, choices=OCCUPATION)
     residential_address = models.CharField(max_length=250, choices=RESIDENCE)
 
+    class Meta:
+        verbose_name = 'Client Spouse Data'
+        verbose_name_plural = 'Client Spouses Data'
 
 class MaternityData(models.Model):
     client  = models.ForeignKey(ClientData, on_delete=models.CASCADE, blank=True, null=True)
@@ -183,19 +187,70 @@ class MaternityData(models.Model):
     living_children = models.CharField(max_length=2)
     miscariages = models.CharField(max_length=2)
     year_of_miscariage = models.DateField(null=True)
+
+    class Meta:
+        verbose_name = 'Maternity Data'
+        verbose_name_plural = 'Maternity Data'
     
 
 class MenstruationData(models.Model):
-    pass
+    client = models.ForeignKey(ClientData, on_delete=models.CASCADE)
+    period_length = models.PositiveIntegerField()
+    cycle_length = models.PositiveIntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    class Meta:
+        verbose_name = 'Menstruation Data'
+        verbose_name_plural = 'Menstruation Data'
+    
 
 class SpecialTestData(models.Model):
-    pass
+    complete_blood_count = models.CharField(max_length=100)
+    blood_type = models.CharField(max_length=100)
+    urinalysis = models.CharField(max_length=100)
+    urine_culture = models.CharField(max_length=100)
+
+    rubella = models.CharField(max_length=100)
+    hepatitis_b = models.CharField(max_length=100)
+    hepatitis_c = models.CharField(max_length=100)
+    sexual_transmitted_diseases = models.CharField(max_length=100)
+    tb = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Special Early Test'
+        verbose_name_plural = 'Special Early Tests'
+
+
+
+class SpecialTestDoneLaterData(models.Model):
+    glucose_screening = models.CharField(max_length=100)
+    gbs = models.CharField(max_length=100)
+    urinalysis = models.CharField(max_length=100)
+    urine_culture = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Special Test Done Later'
+        verbose_name_plural = 'Special Tests Done Later'
 
 class ReportsData(models.Model):
-    pass
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    data = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name = 'Report'
+        verbose_name_plural = 'Reports'
+    
 
 
 class Notification(models.Model):
-    pass
+    recipient= models.EmailField()
+    sender = models.EmailField()
+    header = models.CharField(max_length=50)
+    msg = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
 
 
